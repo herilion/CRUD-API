@@ -28,4 +28,8 @@ export default class TodoController {
         return console.log(e);
       });
   }
+
+  updateTodo(req, res){
+
+  }
 }
