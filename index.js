@@ -1,4 +1,5 @@
 import express from "express";
+import query from "./config/index.js";
 import todosRouter from "./routes/todosRouter.js";
 const app = express();
 app.use(express.json());

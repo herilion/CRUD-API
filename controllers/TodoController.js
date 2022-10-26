@@ -1,14 +1,4 @@
-import { readFile } from "node:fs/promises";
-import { fileURLToPath } from "node:url";
-import path from "path";
-
-const todos = [
-  {
-    id: 25545353,
-    title: "Ma première tâche",
-    completed: false,
-  },
-];
+import query from "../config/index.js";
 export default class TodoController {
   createTodo(req, res) {
     const todo = {
@@ -16,10 +6,26 @@ export default class TodoController {
       title: req.body.title,
       completed: false,
     };
-    todos.push(todo);
+    const sql = `
+    INSERT INTO todos(title) VALUES($1)
+    `;
+    try {
+      (async () => {
+        await query(sql, [todo.title]);
+      })();
+    } catch (e) {
+      console.log(e);
+    }
     return res.status(201).send(todo);
   }
   getAllTodos(req, res) {
-    return res.status(200).send(todos);
+    const sql = `SELECT * FROM todos`;
+    return query(sql, [])
+      .then((results) => {
+        return res.status(200).send(results.rows);
+      })
+      .catch((e) => {
+        return console.log(e);
+      });
   }
 }
