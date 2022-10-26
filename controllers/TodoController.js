@@ -30,6 +30,16 @@ export default class TodoController {
   }
 
   updateTodo(req, res){
+    const id = parseInt(req.params.id);
+    const sql ="UPDATE todos SET title = $1 , completed =$2 WHERE id =$3";
+
+    try {
+        (async (title, completed, id) => {
+            await query(sql, [title, completed, id]);
+          })();
+    } catch (error) {
+        
+    }
 
   }
 }
