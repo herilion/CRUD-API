@@ -42,9 +42,8 @@ export default class TodoController {
     }
 
   }
-}
-deleteTodo(req, res) 
-{ 
+  deleteTodo(req, res) 
+  { 
   const id= parseInt(req.params.id)
   const sql = `DELETE * FROM todos WHERE id=$1`
 
@@ -57,4 +56,6 @@ deleteTodo(req, res)
 }
 
 }
+}
+  
   
