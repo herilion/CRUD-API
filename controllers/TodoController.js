@@ -47,5 +47,14 @@ deleteTodo(req, res)
 { 
   const id= parseInt(req.params.id)
   const sql = `DELETE * FROM todos WHERE id=$1`
-  
+
+  try {
+    (async (id) => {
+        await query(sql, id);
+      })();
+} catch (error) {
+    
 }
+
+}
+  
