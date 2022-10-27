@@ -42,4 +42,18 @@ export default class TodoController {
     }
 
   }
+  deleteTodo(req, res){
+    const id = parseInt(req.params.id);
+    const sql =`DELETE FROM todos SET id=$1`;
+
+    try {
+        (async (id) => {
+            await query(sql, [id]);
+          })();
+    } catch (error) {
+      
+        
+    }
+
+  }
 }
